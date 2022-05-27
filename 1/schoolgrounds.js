@@ -1,4 +1,8 @@
-var hidden;
+var hidden1;
+var hidden2;
+var hidden3;
+var hidden4;
+var hidden5;
 var edeck;
 var ydeck;
 var candraw = true;
@@ -8,6 +12,7 @@ window.onload = function() {
     buildYourDeck();
     shuffleEnemyDeck();
     shuffleYourDeck();
+    startGame();
 }
 
 function buildEnemyDeck() {
@@ -26,7 +31,6 @@ function shuffleEnemyDeck() {
         edeck[i] = edeck[j];
         edeck[j] = temp;
     }
-    console.log(edeck);
 }
 
 function buildYourDeck() {
@@ -45,5 +49,36 @@ function shuffleYourDeck() {
         ydeck[i] = ydeck[j];
         ydeck[j] = temp;
     }
-    console.log(ydeck);
+}
+
+function startGame() {
+    hidden1 = edeck.pop();
+    hidden2 = edeck.pop();
+    hidden3 = edeck.pop();
+    hidden4 = edeck.pop();
+    hidden5 = edeck.pop();
+    
+    document.getElementById("draw").addEventListener("click", draw);
+    document.getElementById("battle").addEventListener("click", battle);
+}
+
+function draw() {
+    if (!candraw) {
+        return;
+    }
+    for (let i = 0; i < 5; i++) {
+        let cardImg = document.createElement("img");
+        let card = ydeck.pop();
+        cardImg.src = "./cards/" + card + ".png";
+        document.getElementById("your-cards").append(cardImg);
+    }
+}
+
+function battle() {
+    canHit = false;
+    document.getElementById("hidden1").src = "./cards/" + hidden1 + ".png";
+    document.getElementById("hidden2").src = "./cards/" + hidden2 + ".png";
+    document.getElementById("hidden3").src = "./cards/" + hidden3 + ".png";
+    document.getElementById("hidden4").src = "./cards/" + hidden4 + ".png";
+    document.getElementById("hidden5").src = "./cards/" + hidden5 + ".png";
 }
